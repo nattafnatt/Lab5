@@ -13,7 +13,7 @@ import java.util.Locale;
 public class TimeServerUDP {
 	DatagramSocket socket;
 	DatagramPacket packet;
-	
+	//hejsan!
 	public TimeServerUDP(){}
 	public void start(){
 		initialize();
@@ -22,17 +22,12 @@ public class TimeServerUDP {
 	
 		while(true){
 			command = receive();
-//			System.out.println(command);
-//			result=doCommandA();
-//			System.out.println(result);
-//			send(result);
 			switch (command.trim()) {
 		    	case "time":
 		    		result = doCommandA();
 		    		break;
 			    case "date":
 			    	result = doCommandB();
-			    	//System.out.println(command);
 			    	break;
 			    default:
 			    	result ="Invalid Command";
@@ -50,7 +45,6 @@ public class TimeServerUDP {
 			packet = new DatagramPacket(buf, buf.length, address, port);
 			socket.send(packet);
 		} catch (IOException e) {
-			//System.out.println("send()");
 		}	
 	}
 	
@@ -81,15 +75,16 @@ public class TimeServerUDP {
 	}
 	
 	private String initialize() {
-			try {
-				socket = new DatagramSocket(30000);
-				byte[] buf = new byte[256];
-				packet = new DatagramPacket(buf, buf.length);
-			} catch (SocketException e) {
-			//	System.out.println("initialize()");
-			}
+		try {
+			socket = new DatagramSocket(30000);
+			byte[] buf = new byte[256];
+			packet = new DatagramPacket(buf, buf.length);
+		}	catch (SocketException e) {
+			System.out.println("initialize()");
+		}
 		return null;
 	}
+	
 	public static void main(String args[]) throws Exception{       
 		TimeServerUDP server = new TimeServerUDP();
 		server.start();
