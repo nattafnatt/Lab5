@@ -18,7 +18,7 @@ public class TimeServerUDP2 {
 	public TimeServerUDP2(){}
 	public void start(){
 		multicastServer.start();
-		System.out.println("Nu är vi här");
+		
 		initialize();
 		String command;
 		String result;		

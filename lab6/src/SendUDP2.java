@@ -13,9 +13,9 @@ public class SendUDP2 {
 		byte[] sendData = new byte[1024];
 		byte[] receiveData = new byte[1024];
 		String sentence;		
-		sentence=args[2];
+		sentence=args[1];
 		sendData = sentence.getBytes();
-		DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 30000);       
+		DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress,Integer.parseInt(args[0]) );       
 		clientSocket.send(sendPacket);    
 		DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
 		clientSocket.receive(receivePacket);
