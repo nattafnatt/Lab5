@@ -10,7 +10,7 @@ public class MCReader {
 	    MulticastSocket ms = new MulticastSocket(4099);
 	    InetAddress ia = InetAddress.getByName("experiment.mcast.net");
 	    ms.joinGroup(ia);
-	    while(true) {
+	    while(true){
 		byte[] buf = new byte[65536];
 		DatagramPacket dp = new DatagramPacket(buf,buf.length);
 		ms.receive(dp);

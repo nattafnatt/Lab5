@@ -1,3 +1,4 @@
+//Extend your time server with MCServerOffer using a threaded design.
 package lab6;
 
 import java.io.IOException;
@@ -10,12 +11,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class TimeServerUDP {
+public class TimeServerUDP2 {
+	MultiCastServerThread multicastServer = new MultiCastServerThread();
 	DatagramSocket socket;
 	DatagramPacket packet;
-
-	public TimeServerUDP(){}
+	public TimeServerUDP2(){}
 	public void start(){
+		multicastServer.start();
+		System.out.println("Nu är vi här");
 		initialize();
 		String command;
 		String result;		
@@ -67,7 +70,10 @@ public class TimeServerUDP {
 			packet = new DatagramPacket(buf, buf.length);
 			socket.receive(packet);
 			String command = new String(packet.getData());
+			System.out.println("receive()+");
+
 			return command;
+			
 		} catch (IOException e) {
 			System.out.println("receive()");
 		}
@@ -79,6 +85,8 @@ public class TimeServerUDP {
 			socket = new DatagramSocket(30000);
 			byte[] buf = new byte[256];
 			packet = new DatagramPacket(buf, buf.length);
+			System.out.println("initialize()+");
+
 		}	catch (SocketException e) {
 			System.out.println("initialize()");
 		}
@@ -86,8 +94,9 @@ public class TimeServerUDP {
 	}
 	
 	public static void main(String args[]) throws Exception{       
-		TimeServerUDP server = new TimeServerUDP();
+		TimeServerUDP2 server = new TimeServerUDP2();
 		server.start();
 	}
 }
+
 

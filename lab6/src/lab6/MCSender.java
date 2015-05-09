@@ -1,4 +1,4 @@
-	package lab6;
+package lab6;
 	
 import java.net.*;
 import java.io.*;
